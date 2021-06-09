@@ -12,7 +12,7 @@
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <title>Image To Text</title>
+    <title>Image To Text Thai identity card</title>
     <style>
       body {
         content: "By boadzie Daniel";
@@ -32,9 +32,9 @@
   <body>
     <section class="container text-gray-500 mx-auto px-4 py-4 flex flex-col">
       <div>
-        <h3 class="text-6xl font-bold">Textman</h3>
+        <h3 class="text-6xl font-bold">สแกนบัตรประจำตัวประชาชน</h3>
         <p class="mt-2 italic text-2xl text-left lg:text-center font-semibold">
-          Upload a picture and have the text extracted from it.
+          กดเลือกรูปภาพ จากนั้นให้กดแสดงข้อความ เพื่อรับข้อมูลกลับมา
         </p>
       </div>
       <form method="post" action="/extract_text" enctype="multipart/form-data">
@@ -57,7 +57,7 @@
 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z"
               />
             </svg>
-            <span class="mt-2 text-base leading-normal">Select a file</span>
+            <span class="mt-2 text-base leading-normal">เลือกรูปภาพ</span>
             <input type="file" name="upload_file" class="hidden" />
           </label>
         </div>
@@ -65,7 +65,7 @@
           <input
             class="text-center w-30 text-white bg-blue-500 hover:bg-blue-400 border-0 py-1 px-2 focus:outline-none hover:bg-red-600 rounded text-lg"
             type="submit"
-            value="Extract text"
+            value="แสดงข้อความ"
           />
         </div>
       </form>
@@ -73,8 +73,15 @@
       <div
         class="w-1/2 mr-auto ml-auto rounded-lg mt-4 bg-gray-600 text-white py-4 px-4"
       >
-        <p class="text-lg">{{label}}</p>
+        <p class="text-lg">{{label['ศาสนา']}}</p>
+        <img src="{{cropped_img}}" alt="img" width="128" height="128">      
       </div>
+      <div>
+      <p>From wikipedia</p>
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4
+        //8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
+
+    </div>
       {% endif %}
     </section>
   </body>

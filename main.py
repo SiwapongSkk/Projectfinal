@@ -96,8 +96,13 @@ async def extract_text(request: Request):
         image_stream.seek(0)
         file_bytes = np.asarray(bytearray(image_stream.read()), dtype=np.uint8)
         frame = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
-        label =  ocr.read_img(frame)
+        label,cropped_img =  ocr.read_img(frame)
+
+        #encoded_image_string = base64.b64encode(cropped_img)
+        #print(encoded_image_string)
        
-        # return {"label": label}
+        #lda = label.address
+
+        #return {"label": label}
    
-    return templates.TemplateResponse("index.html", {"request": request, "label": label})
+    return templates.TemplateResponse("index.html", {"request": request, "label": label,"cropped_img": cropped_img})

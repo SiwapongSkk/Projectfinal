@@ -3,8 +3,6 @@ import numpy as np
 import pytesseract
 import io
 
-
-
 def read_img(img):
 
     width=700
@@ -61,6 +59,12 @@ def read_img(img):
      
     # resize image
     resizedcropimg = cv2.resize(cropimg, dim, interpolation = cv2.INTER_AREA)
+
+    returnresizedcropimg = cv2.imencode('.jpg', resizedcropimg)[1].toString()
+
+    #encoded_image_string = base64.b64encode(returnresizedcropimg)
+    #print(returnresizedcropimg)
+
 
 
     #converting image into gray scale image
@@ -171,9 +175,9 @@ def read_img(img):
     resultresultlastaddress = resultresultlastaddress.replace("\f", "")
 
     return {#"image_to_string":text,
-     "resultIDcardnumber":resultIDcardnumber, "resultnamethai":resultnamethai, "resultnameeng":resultnameeng,
-     "resultlastname":resultlastname, "resultbirthday":resultbirthday, "resultbirthdayeng":resultbirthdayeng
-     , "resultreligion":resultreligion, "resultaddress":resultaddress+resultresultlastaddress}
+     "เลขบัตรประจำตัวประชาชน":resultIDcardnumber, "ชื่อภาษาไทย":resultnamethai, "ชื่อภาษาอังกฤษ":resultnameeng,
+     "นามสกุลภาษาอังกฤษ":resultlastname, "วันเกิดไทย":resultbirthday, "วันเกิดอังกฤษ":resultbirthdayeng
+     , "ศาสนา":resultreligion, "address":resultaddress+resultresultlastaddress}, returnresizedcropimg
 
 #  , file: bytes = File(...)
 
