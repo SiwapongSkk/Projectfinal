@@ -60,7 +60,7 @@ def read_img(img):
     # resize image
     resizedcropimg = cv2.resize(cropimg, dim, interpolation = cv2.INTER_AREA)
 
-    returnresizedcropimg = cv2.imencode('.jpg', resizedcropimg)[1].toString()
+    returnresizedcropimg = cv2.imencode('.jpg', resizedcropimg)[1].tostring()
 
     #encoded_image_string = base64.b64encode(returnresizedcropimg)
     #print(returnresizedcropimg)
