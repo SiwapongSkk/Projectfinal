@@ -19,20 +19,34 @@
         margin: 0;
         min-height: 100vh;
         background-color: #ffffff;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath fill='%2335323a' fill-opacity='0.17' d='M14 16H9v-2h5V9.87a4 4 0 1 1 2 0V14h5v2h-5v15.95A10 10 0 0 0 23.66 27l-3.46-2 8.2-2.2-2.9 5a12 12 0 0 1-21 0l-2.89-5 8.2 2.2-3.47 2A10 10 0 0 0 14 31.95V16zm40 40h-5v-2h5v-4.13a4 4 0 1 1 2 0V54h5v2h-5v15.95A10 10 0 0 0 63.66 67l-3.47-2 8.2-2.2-2.88 5a12 12 0 0 1-21.02 0l-2.88-5 8.2 2.2-3.47 2A10 10 0 0 0 54 71.95V56zm-39 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm40-40a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM15 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm40 40a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'%3E%3C/path%3E%3C/svg%3E");
+        background-image: url("https://cdn.pixabay.com/photo/2014/03/23/09/38/swan-293157_960_720.jpg");
         font-family: "Montserrat", sans-serif;
         font-weight: 700px;
-        text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
       }
+    #div1 {
+      border:solid 1px black;
+      padding-top: 10px;
+      padding-right: 10px;
+      padding-bottom: 10px;
+      padding-left: 10px;
+    
+    }
+    #div2 {
+      padding-top: 10px;
+      padding-right: 10px;
+      padding-bottom: 10px;
+      padding-left: 10px;
+        
+}
     </style>
   </head>
   <body>
     <section class="container text-gray-500 mx-auto px-4 py-4 flex flex-col">
       <div>
-        <h3 class="text-6xl font-bold">สแกนบัตรประจำตัวประชาชน</h3>
+        <h3 class="text-6xl font-bold lg:text-center">สแกนบัตรประจำตัวประชาชน</h3>
         <p class="mt-2 italic text-2xl text-left lg:text-center font-semibold">
           กดเลือกรูปภาพ จากนั้นให้กดแสดงข้อความ เพื่อรับข้อมูลกลับมา
         </p>
@@ -48,7 +62,6 @@
               class="w-8 h-8"
               fill="#fff"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20
 20"
             >
               <path
@@ -61,27 +74,67 @@
             <input type="file" name="upload_file" class="hidden" />
           </label>
         </div>
-        <div>
+        <div class="lg:text-center ">
           <input
-            class="text-center w-30 text-white bg-blue-500 hover:bg-blue-400 border-0 py-1 px-2 focus:outline-none hover:bg-red-600 rounded text-lg"
+            class="text-align: center; text-center w-30 text-white bg-blue-500 hover:bg-blue-400 border-0 py-1 px-2 focus:outline-none hover:bg-red-600 rounded text-lg lg:text-center"
             type="submit"
-            value="แสดงข้อความ"
+            value="แสดงข้อมูลจากการ OCR"
           />
         </div>
       </form>
       {% if label %}
       <div
-        class="w-1/2 mr-auto ml-auto rounded-lg mt-4 bg-gray-600 text-white py-4 px-4"
+        class="w-1/2 mr-auto ml-auto rounded-lg mt-4 bg-gray-600 text-gray py-4 px-4"
       >
-        <p class="text-lg">{{label['ศาสนา']}}</p>
-        <img src="{{cropped_img}}" alt="img" width="128" height="128">      
-      </div>
-      <div>
-      <p>From wikipedia</p>
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4
-        //8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==" alt="Red dot" />
+        <div style="background-color:white;"  >
+         <p id='div2' style="font-size:30px">ข้อมูลจากบัตรประจำตัวประชาชน</p> 
+    
+         <div id='div1'>
+         <div ><p class="text-lg">เลขบัตรประจำตัวประชาชน</p></div>
+         <div ><p class="text-lg">{{label['เลขบัตรประจำตัวประชาชน']}} </p> </div>
+          </div>
 
-    </div>
+        <div id='div1'>
+        <div ><p class="text-lg">ชื่อภาษาไทย</p></div>
+        <div ><p class="text-lg">{{label['ชื่อภาษาไทย']}} </p></div>
+        </div>
+
+        <div id='div1'>
+        <div ><p class="text-lg">ชื่อภาษาอังกฤษ</p></div>
+        <div ><p class="text-lg">{{label['ชื่อภาษาอังกฤษ']}} </p></div>
+        </div>
+
+        <div id='div1'>
+        <div ><p class="text-lg">นามสกุลภาษาอังกฤษ</p></div>
+        <div ><p class="text-lg">{{label['นามสกุลภาษาอังกฤษ']}} </p></div>
+        </div>
+
+        <div id='div1'>
+        <div ><p class="text-lg">วันเกิดไทย</p></div>
+        <div ><p class="text-lg">{{label['วันเกิดไทย']}} </p></div>
+        </div>
+
+        <div id='div1'>
+        <div ><p class="text-lg">วันเกิดอังกฤษ</p></div>
+        <div ><p class="text-lg">{{label['วันเกิดอังกฤษ']}} </p></div>
+        </div>
+
+        <div id='div1'>
+        <div ><p class="text-lg">ศาสนา</p></div>
+        <div ><p class="text-lg">{{label['ศาสนา']}} </p></div>
+        </div>
+
+        <div id='div1'>
+        <div ><p class="text-lg">ที่อยู่</p></div>
+        <div ><p class="text-lg">{{label['address']}} </p></div>
+        </div>
+
+        </div>
+        <br><br>
+        <center><img src="{{cropped_img}}" alt="centered image" height="400" width="500"> </center>
+           
+      </div>
+    
       {% endif %}
     </section>
   </body>

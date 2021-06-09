@@ -36,9 +36,9 @@ def read_root():
     return {"Hello": "World11"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+#@app.get("/items/{item_id}")
+#def read_item(item_id: int, q: Optional[str] = None):
+#    return {"item_id": item_id, "q": q}
 
 
 # upload single file
@@ -49,7 +49,7 @@ async def up_img_book(file: UploadFile = File(...)):
     image_stream.seek(0)
     file_bytes = np.asarray(bytearray(image_stream.read()), dtype=np.uint8)
     frame = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
-    label =  ocr.read_img(frame)
+    label,cropped_img =  ocr.read_img(frame)
 
     return  { "File Name": file.filename, "label": label}
 
@@ -98,6 +98,10 @@ async def extract_text(request: Request):
         frame = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
         label,cropped_img =  ocr.read_img(frame)
 
+        cropped_img_base64 = base64.b64encode(cropped_img)
+        str_temp = 'data:image/jpg;base64, '+str(cropped_img_base64)[2:-1]
+
+
         #encoded_image_string = base64.b64encode(cropped_img)
         #print(encoded_image_string)
        
@@ -105,4 +109,4 @@ async def extract_text(request: Request):
 
         #return {"label": label}
    
-    return templates.TemplateResponse("index.html", {"request": request, "label": label,"cropped_img": cropped_img})
+    return templates.TemplateResponse("index.html", {"request": request, "label": label,"cropped_img": str_temp})

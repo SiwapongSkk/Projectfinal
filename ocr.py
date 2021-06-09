@@ -45,7 +45,7 @@ def read_img(img):
                     # draw the biggest contour (c) in green
     #                 cv2.rectangle(output,(x,y),(x+w,y+h),(0,255,0),2)
 
-    img0 = cv2.rectangle(img,(x,y),(w+x,h+y),(0,0,255),10)
+    #img0 = cv2.rectangle(img,(x,y),(w+x,h+y),(0,0,255),10)
 
     #cv2.imshow('img 000',img0)
 
@@ -60,11 +60,8 @@ def read_img(img):
     # resize image
     resizedcropimg = cv2.resize(cropimg, dim, interpolation = cv2.INTER_AREA)
 
+
     returnresizedcropimg = cv2.imencode('.jpg', resizedcropimg)[1].tostring()
-
-    #encoded_image_string = base64.b64encode(returnresizedcropimg)
-    #print(returnresizedcropimg)
-
 
 
     #converting image into gray scale image
