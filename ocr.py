@@ -61,7 +61,23 @@ def read_img(img):
     resizedcropimg = cv2.resize(cropimg, dim, interpolation = cv2.INTER_AREA)
 
 
-    returnresizedcropimg = cv2.imencode('.jpg', resizedcropimg)[1].tostring()
+
+
+    imgWatermark=cv2.imread('Untitled_Artwork.jpg') #read image
+
+    width = 410
+    height = 310
+    imgWatermark0=cv2.resize(imgWatermark,(width,height)) #resize image
+
+    large_img = resizedcropimg
+    watermark = imgWatermark0
+
+    img1 = cv2.resize(large_img,(800,600))
+    img2 = cv2.resize(watermark,(800,600))
+    blended = cv2.addWeighted(img1, 0.5, img2, 0.3, 0)
+
+
+    returnresizedcropimg = cv2.imencode('.jpg', blended)[1].tostring()
 
 
     #converting image into gray scale image
@@ -74,7 +90,7 @@ def read_img(img):
 
     # then tesseract won't able to detect text correctly and this will give incorrect result
 
-    resized = cv2.threshold(resized, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+    resized = cv2.threshold(resized, 0, 255, cv2.THRESH_TOZERO | cv2.THRESH_OTSU)[1]
 
 
     #img99=cv2.imread('IMG_25640601_111717.jpg')
@@ -90,6 +106,47 @@ def read_img(img):
     resultIDcardnumber = pytesseract.image_to_string(crop01, lang='tha+eng')
     resultIDcardnumber = resultIDcardnumber.replace("\n", "")
     resultIDcardnumber = resultIDcardnumber.replace("\f", "")
+    resultIDcardnumber = resultIDcardnumber.replace(" ", "")
+
+    IDcardnumber = int(resultIDcardnumber)
+    def split(word):
+        return [char for char in word]
+     
+    IDcardnumbersplit = split(resultIDcardnumber)
+
+    Multiplier =[13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2]
+
+    sumall = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+    for x in range(0, 12):
+        
+        ID = int(IDcardnumbersplit[x])
+        
+        Mul = Multiplier[x]
+        sumx = ID*Mul
+        
+        sumall[x] = sumx
+        
+    step3 = 0
+    for x in range(0, 12):
+        
+        step3 = step3 + sumall[x]
+
+    step4 = step3 % 11
+
+    step5 = 11 - step4
+
+    #Check Digit
+    CheckDigit = int(IDcardnumbersplit[12])
+    print(CheckDigit,"is Check Digit")
+
+    if ( step5 == 8):
+        print(step5,"is correct Check Digit")
+        resultIDcardnumber = resultIDcardnumber + " is correct ID Card"
+    elif  ( step5 != 8):
+        print(step5,"is not correct Check Digit")
+        resultIDcardnumber = resultIDcardnumber + " is not correct ID Card"
+
 
     #crop image 02 นาย ศิรพงษ์ กอบกิจ resultnamethai
     y=int(18.387*height*0.01)

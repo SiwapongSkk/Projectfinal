@@ -78,6 +78,11 @@ async def up_img_book(file: Abc ):
 #app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
+@app.get("/mainpage")
+def home(request: Request):
+    return templates.TemplateResponse("mainpage.html", {"request": request})
+    
+
 @app.get("/0")
 def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})

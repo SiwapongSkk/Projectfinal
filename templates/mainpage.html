@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<html>
+<head>
+<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -12,21 +12,26 @@
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
     />
+
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Image To Text Thai identity card</title>
     <style>
       body {
         content: "By boadzie Daniel";
         margin: 0;
         min-height: 100vh;
-
-        background-color: #ffffff;
-        background-image: url("https://cdn.pixabay.com/photo/2014/03/23/09/38/swan-293157_960_720.jpg");
-
         
+        background: #2b5876;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #4e4376, #2b5876);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to right, #4e4376, #2b5876); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
         font-family: "Montserrat", sans-serif;
         font-weight: 700px;
         display: flex;
-        align-items: center;
+        
         justify-content: center; 
       }
     #div1 {
@@ -45,15 +50,22 @@
         
 }
     </style>
-  </head>
-  <body>
-    <section class="container text-gray-500 mx-auto px-4 py-4 flex flex-col">
-      <div>
-        <h3 class="text-4xl font-bold lg:text-center">สแกนบัตรประจำตัวประชาชน</h3>
-        <p class="mt-2 italic text-2xl text-left lg:text-center font-semibold">
-          *ควรวางบัตรในแนวระนาบกับพื้น และพื้นหลังของบัตรควรมีสีที่แตกต่างจากบัตร เช่นสีดำ.
-        </p>
-      </div>
+</head>
+<body>
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>สแกนบัตรประจำตัวประชาชน</h1>      
+    <p>ใช้สำหรับสแกนบัตรประจำตัวประชนชน เพื่อดึงข้อมูลที่ได้จากบัตร โดยใช้เทคนิคการ OCR ของ Pytesseract ที่พัฒนาโดย Google</p>
+  </div>
+
+
+  <p>This is some text.</p>      
+  <p>This is another text.</p>  
+
+
+
+
       <form method="post" action="/extract_text" enctype="multipart/form-data">
         <div
           class="flex w-full h-40 items-center justify-center bg-grey-lighter"
@@ -85,6 +97,9 @@
           />
         </div>
       </form>
+
+
+
       {% if label %}
       <div
         class="w-90% mr-auto ml-auto rounded-lg mt-4 bg-gray-600 text-gray py-4 px-4"
@@ -146,6 +161,11 @@
       </div>
     
       {% endif %}
-    </section>
-  </body>
+      
+</div>
+
+
+
+
+</body>
 </html>
