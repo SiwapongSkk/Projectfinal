@@ -108,6 +108,8 @@ def read_img(img):
     resultIDcardnumber = resultIDcardnumber.replace("\f", "")
     resultIDcardnumber = resultIDcardnumber.replace(" ", "")
 
+    """
+
     IDcardnumber = int(resultIDcardnumber)
     def split(word):
         return [char for char in word]
@@ -146,7 +148,7 @@ def read_img(img):
     elif  ( step5 != 8):
         print(step5,"is not correct Check Digit")
         resultIDcardnumber = resultIDcardnumber + " is not correct ID Card"
-
+    """
 
     #crop image 02 นาย ศิรพงษ์ กอบกิจ resultnamethai
     y=int(18.387*height*0.01)
@@ -224,14 +226,14 @@ def read_img(img):
     h=28
     w=180
     crop01 = resizedcropimg[y:y+h, x:x+w]
-    resultresultlastaddress = pytesseract.image_to_string(crop01, lang='tha+eng')
+    resultresultlastaddress = pytesseract.image_to_string(crop01, lang='tha')
     resultresultlastaddress = resultresultlastaddress.replace("\n", "")
     resultresultlastaddress = resultresultlastaddress.replace("\f", "")
 
     return {#"image_to_string":text,
      "เลขบัตรประจำตัวประชาชน":resultIDcardnumber, "ชื่อภาษาไทย":resultnamethai, "ชื่อภาษาอังกฤษ":resultnameeng,
      "นามสกุลภาษาอังกฤษ":resultlastname, "วันเกิดไทย":resultbirthday, "วันเกิดอังกฤษ":resultbirthdayeng
-     , "ศาสนา":resultreligion, "address":resultaddress+resultresultlastaddress}, returnresizedcropimg
+     , "ศาสนา":resultreligion, "address":resultaddress+" " + resultresultlastaddress}, returnresizedcropimg
 
 #  , file: bytes = File(...)
 
